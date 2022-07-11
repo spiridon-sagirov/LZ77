@@ -1,7 +1,7 @@
 
  Hello, this is a git training.
 	 hello
-	 hiii my name is michal
+	hello2
 hii every
 Hello, this is a git training.
 hi i am tamar
