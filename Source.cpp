@@ -1,6 +1,6 @@
 
  Hello, this is a git training.
-	 hello
+	 this is changed by tamar
 	 hiii my name is michal
 hii every
 Hello, this is a git training.
