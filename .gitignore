@@ -5,7 +5,10 @@
 .vs
 ipch
 *.db
+*.opendb
 *.filters
+Debug
+Release
 
 # Compiled Object files
 *.slo
