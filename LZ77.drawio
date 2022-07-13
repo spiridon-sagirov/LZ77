@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-07-13T11:06:38.462Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36" etag="P2ih_uCOq9Kjcdgln2WK" version="20.0.4" type="github">
+<mxfile host="app.diagrams.net" modified="2022-07-13T11:15:26.891Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36" etag="BY8VxZidRKkzdCrKMi0Z" version="20.0.4" type="github">
   <diagram id="s9EjchyGP2vE1d-u13Uv" name="Page-1">
     <mxGraphModel dx="720" dy="476" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
       <root>
@@ -119,7 +119,7 @@
           <mxGeometry x="810" y="310" width="110" height="50" as="geometry" />
         </mxCell>
         <mxCell id="vp09XFMbbm3uFpwTHDYr-30" value="SlidingWindowFile" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
-          <mxGeometry x="100" y="430" width="300" height="130" as="geometry" />
+          <mxGeometry x="100" y="430" width="300" height="156" as="geometry" />
         </mxCell>
         <mxCell id="vp09XFMbbm3uFpwTHDYr-31" value="open(filePath, searchBufferSize, lookAheadBufferSize)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="vp09XFMbbm3uFpwTHDYr-30">
           <mxGeometry y="26" width="300" height="26" as="geometry" />
@@ -127,11 +127,14 @@
         <mxCell id="vp09XFMbbm3uFpwTHDYr-32" value="getBuffers(*searchBuffer, *lookAheadBuffer)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="vp09XFMbbm3uFpwTHDYr-30">
           <mxGeometry y="52" width="300" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="vp09XFMbbm3uFpwTHDYr-33" value="moveForward(bytesCount)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="vp09XFMbbm3uFpwTHDYr-30">
+        <mxCell id="vp09XFMbbm3uFpwTHDYr-33" value="read(bytesCount)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="vp09XFMbbm3uFpwTHDYr-30">
           <mxGeometry y="78" width="300" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="vp09XFMbbm3uFpwTHDYr-34" value="endOfFile() : bool" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="vp09XFMbbm3uFpwTHDYr-30">
+        <mxCell id="vp09XFMbbm3uFpwTHDYr-42" value="write(buffer)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="vp09XFMbbm3uFpwTHDYr-30">
           <mxGeometry y="104" width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="vp09XFMbbm3uFpwTHDYr-34" value="endOfFile() : bool" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="vp09XFMbbm3uFpwTHDYr-30">
+          <mxGeometry y="130" width="300" height="26" as="geometry" />
         </mxCell>
         <mxCell id="vp09XFMbbm3uFpwTHDYr-36" value="BytesBuffer" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
           <mxGeometry x="160" y="630" width="160" height="112" as="geometry" />
