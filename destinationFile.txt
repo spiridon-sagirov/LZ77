@@ -1,2 +1,0 @@
-hi everyone i need to read this file and write it from another file
-i hope that i understand how to do it!!!
