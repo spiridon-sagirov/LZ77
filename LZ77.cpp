@@ -8,7 +8,7 @@ using namespace std;
 
 int Lz77(string sourseFile, int buffer) {
 	fstream my_file;
-	ofstream destination("destinationFile.txt");
+	ofstream destination("destinationFile.Bin");
 	my_file.open(sourseFile, ios::in);
 	if (!my_file) 
 		return 0;
@@ -29,6 +29,6 @@ int Lz77(string sourseFile, int buffer) {
 	return 0;
 }
 int main() {
-	Lz77("sourseFile.txt", 3);
+	Lz77("binfile.Bin", 3);
 }
 
