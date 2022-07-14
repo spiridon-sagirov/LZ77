@@ -1,6 +1,4 @@
-// LZ77.cpp : Defines the entry point for the console application.
-//
-#include "stdafx.h"
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -31,9 +29,3 @@ int Lz77(string sourseFile, int buffer) {
 	my_file.close();
 	return 0;
 }
-
-
-int main() {
-	Lz77("sourseFile.txt", 3);
-}
-
