@@ -7,25 +7,23 @@
 using namespace std;
 
 int Lz77(string sourseFile,string destinationFile, int buffer) {
-	fstream my_file;
-	ofstream destination(destinationFile);
-	my_file.open(sourseFile, ios::in);
-	if (!my_file) 
-		return 0;
+	fstream in(sourseFile, ios::binary | ios::in);
+	fstream out(destinationFile, ios::binary | ios::out);
 	char ch;
-	while (!my_file.eof())
+	while (!in.eof())
 	{
 		string res = "";
 		for (int i = 0; i < buffer; i++)
 		{
-			my_file >> noskipws >> ch;
-			if (my_file.eof())
+			in >> noskipws >> ch;
+			if (in.eof())
 				break;
 			res += ch;
 		}
-		destination << res;
+		out << res;
 	}
-	my_file.close();
+	in.close();
+	out.close();
 	return 0;
 }
 void shelllz77(string comand,string pathDecompress,string pathCompress,int buffer) {
@@ -33,9 +31,8 @@ void shelllz77(string comand,string pathDecompress,string pathCompress,int buffe
 		Lz77(pathDecompress, pathCompress, buffer);
 	else if(comand._Equal("decompress"))
 		Lz77(pathCompress,pathDecompress, buffer);
-
 }
 int main() {
-	shelllz77("compress", "image.png", "destinationFile.jpg",3);
+	shelllz77("compress", "source.jpg", "destination.jpg",3);
 }
 
