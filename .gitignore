@@ -1,6 +1,12 @@
 # Prerequisites
 *.d
 
+# Visual Studio Interal Files
+.vs
+ipch
+*.db
+*.filters
+
 # Compiled Object files
 *.slo
 *.lo
