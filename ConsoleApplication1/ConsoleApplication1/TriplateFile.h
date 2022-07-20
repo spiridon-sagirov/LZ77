@@ -1,19 +1,22 @@
 
 #pragma once
-#include "Triplate.h"
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "Triplate.h"
+
+using namespace std;
+
 
 class TriplateFile
 {
 public:
-	fstream f1;
+	fstream f;
 	void Open(string FileName);
-	///*void Write(Triplate t);
-	//void Close();
-	/////*Triplate Read();*/
-	//bool EndOfFile();*/
+	void Write(Triplate t);
+	void Close();
+	void Read();
+	bool EndOfFile();
 
 };
 

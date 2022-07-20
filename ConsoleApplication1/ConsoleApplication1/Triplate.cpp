@@ -1,9 +1,9 @@
 #include "Triplate.h"
 
 
-Triplate::Triplate(int Back, int Forward, char TheNextChar)
+Triplate::Triplate(int back, int forward, char theNextChar)
 {
-	Back = this->Back;
-	Forward = this->Forward;
-	TheNextChar = this->TheNextChar;
+	this->back = back;
+	 this->forward = forward;
+	 this->theNextChar = theNextChar;
 }

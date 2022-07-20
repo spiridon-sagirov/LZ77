@@ -2,10 +2,10 @@
 class Triplate
 {
 public:
-	int Back;
-	int Forward;
-	char TheNextChar;
-    Triplate(int Back, int Forward, char TheNextChar);
+	int back;
+	int forward;
+	char theNextChar;
+    Triplate(int back, int forward, char theNextChar);
 	
 };
 

@@ -9,36 +9,41 @@ using namespace std;
 
 void TriplateFile::Open(string FileName)
 {
-	f1.open(FileName, ios::out | ios::in);
-	if (!f1)
+	f.open(FileName, ios::in ); 
+	if (!f)
 	{
-		cout << "File creation failed";
-	}
-	else
-	{
-		cout << "New file created \n";
+		throw "File creation failed";
 	}
 }
 
-//void TriplateFile::Write(Triplate t)
-//{
-//	File << "(" << t.Back << "," << t.Forward << "," << t.TheNextChar << ")";
-//}
-//
-//void TriplateFile::Close()
-//{
-//	File.close();
-//}
-//
-////Triplate TriplateFile::Read()
-////{
-////	return triplate();
-////}
-//
-//bool TriplateFile::EndOfFile()
-//{
-//	if (!File.eof())
-//		return false;
-//	else
-//		return true;
-//}
+void TriplateFile::Write(Triplate t)
+{
+	if (f.is_open())
+		f << "(" << t.back << "," << t.forward << "," << t.theNextChar << ")";
+	else
+		throw "The file is closed, you need to open it";
+}
+
+void TriplateFile::Close()
+{
+	if (f.is_open())
+		f.close();
+}
+void TriplateFile::Read()
+{
+	if (f.is_open()) {
+		char mychar;
+		while (f) {
+			mychar = f.get();
+			cout << mychar;
+		}
+		//return triplate();
+	}
+}
+
+bool TriplateFile::EndOfFile()
+{
+	if (!f.eof())
+		return false;
+    return true;
+}
