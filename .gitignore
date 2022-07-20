@@ -5,7 +5,13 @@
 .vs
 ipch
 *.db
+*.opendb
 *.filters
+Debug
+Release
+
+# PyCharm Files
+.idea
 
 # Compiled Object files
 *.slo
