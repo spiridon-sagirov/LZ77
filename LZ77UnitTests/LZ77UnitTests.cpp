@@ -3,9 +3,6 @@
 
 #include "stdafx.h"
 
-#include <boost/test/included/unit_test.hpp>
-using namespace boost::unit_test;
-
 
 #include "..\LZ77Lib\Triplate.h"
 #include "..\LZ77Lib\TriplateFile.h"
@@ -13,25 +10,25 @@ using namespace boost::unit_test;
 
 void free_test_function()
 {
-	fstream f1;
-	f1.open("pppppppppp", std::ios_base::app);
-	if (!f1)
-	{
-		cout << "File creation failed";
-	}
-	//	f1 << "hello";
-	char  num;
-	f1 >> num;
-	cout << "The next number is " << num;
-	f1.close();
-	/*Triplate t1(21, 12, 'g');
-	TriplateFile tf;
-	tf.Open("qwertyuiop");
-	tf.Write(t1);
-	tf.Close();
-	cout << tf.EndOfFile();*/
+	//fstream f1;
+	//f1.open("pppppppppp", std::ios_base::app);
+	//if (!f1)
+	//{
+	//	cout << "File creation failed";
+	//}
+	////	f1 << "hello";
+	//char  num;
+	//f1 >> num;
+	//cout << "The next number is " << num;
+	//f1.close();
+	///*Triplate t1(21, 12, 'g');
+	//TriplateFile tf;
+	//tf.Open("qwertyuiop");
+	//tf.Write(t1);
+	//tf.Close();
+	//cout << tf.EndOfFile();*/
 
-	//BOOST_TEST(true /* test assertion */);
+	BOOST_TEST(true /* test assertion */);
 }
 
 
