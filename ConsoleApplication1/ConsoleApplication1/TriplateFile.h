@@ -12,7 +12,8 @@ class TriplateFile
 {
 public:
 	fstream f;
-	void Open(string FileName);
+	void OpenWrite(string FileName);
+	void OpenRead(string FileName);
 	void Write(Triplate t);
 	void Close();
 	void Read();

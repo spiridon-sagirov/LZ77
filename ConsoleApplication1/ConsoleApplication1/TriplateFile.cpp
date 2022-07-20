@@ -7,9 +7,20 @@
 using namespace std;
 
 
-void TriplateFile::Open(string FileName)
+
+
+void TriplateFile::OpenWrite(string FileName)
 {
-	f.open(FileName, ios::in ); 
+	f.open(FileName, std::ios_base::app);
+	if (!f)
+	{
+		throw "File creation failed";
+	}
+}
+
+void TriplateFile::OpenRead(string FileName)
+{
+	f.open(FileName, ios::in);
 	if (!f)
 	{
 		throw "File creation failed";
