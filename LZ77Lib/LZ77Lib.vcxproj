@@ -127,9 +127,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Triplate.h" />
     <ClInclude Include="TriplateFile.h" />
     <ClInclude Include="stdafx.h" />

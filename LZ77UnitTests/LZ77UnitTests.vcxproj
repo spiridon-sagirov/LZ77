@@ -142,11 +142,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TripletFileTests.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LZ77UnitTests.cpp">
@@ -161,6 +159,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="TripletFileTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LZ77Lib\LZ77Lib.vcxproj">
