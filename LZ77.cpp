@@ -6,10 +6,10 @@
 #include <string>
 using namespace std;
 
-int Lz77(string sourseFile,string destinationFile, int buffer) {
+int Lz77(string sourceFile,string destinationFile, int buffer) {
 	fstream my_file;
 	ofstream destination(destinationFile);
-	my_file.open(sourseFile, ios::in);
+	my_file.open(sourceFile, ios::binary);
 	if (!my_file) 
 		return 0;
 	char ch;
@@ -28,6 +28,7 @@ int Lz77(string sourseFile,string destinationFile, int buffer) {
 	my_file.close();
 	return 0;
 }
+
 void shelllz77(string comand,string pathDecompress,string pathCompress,int buffer) {
 	if (comand._Equal("compress"))
 		Lz77(pathDecompress, pathCompress, buffer);
@@ -36,6 +37,6 @@ void shelllz77(string comand,string pathDecompress,string pathCompress,int buffe
 
 }
 int main() {
-	shelllz77("compress", "image.png", "destinationFile.jpg",3);
+	shelllz77("compress", "image.jpg", "destinationFile.jpg",3);
 }
 
