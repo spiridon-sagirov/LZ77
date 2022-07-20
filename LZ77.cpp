@@ -30,9 +30,9 @@ int Lz77(string sourseFile,string destinationFile, int buffer) {
 }
 
 void shelllz77(string comand,string pathDecompress,string pathCompress,int buffer) {
-	if (comand._Equal("compress"))
+	if (comand == "compress")
 		Lz77(pathDecompress, pathCompress, buffer);
-	else if(comand._Equal("decompress"))
+	else if(comand == "decompress")
 		Lz77(pathCompress,pathDecompress, buffer);
 }
 int main() {
