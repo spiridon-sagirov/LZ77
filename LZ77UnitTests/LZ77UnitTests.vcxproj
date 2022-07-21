@@ -166,6 +166,10 @@
       <Project>{bf67f83b-4ebd-48a2-9560-853d666ecc7c}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="UnitTestsData\TripletWrite01_actual.txt" />
+    <Text Include="UnitTestsData\TripletWrite01_expected.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

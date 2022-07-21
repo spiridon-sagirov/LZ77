@@ -4,27 +4,29 @@
 #include "..\LZ77Lib\Triplate.h"
 #include "..\LZ77Lib\TriplateFile.h"
 
+string unitTestsDataPath("..\\LZ77UnitTests\\UnitTestsData\\");
+
+string readFileContent(const string& filePath)
+{
+	ifstream fileStream(filePath);
+	stringstream stringStream;
+	stringStream << fileStream.rdbuf();
+	return stringStream.str();
+}
 
 void triplet_test_sample()
 {
-	fstream f1;
-	f1.open("pppppppppp", std::ios_base::app);
-	if (!f1)
-	{
-		cout << "File creation failed";
-	}
-	//	f1 << "hello";
-	char  num;
-	f1 >> num;
-	cout << "The next number is " << num;
-	f1.close();
-	/*Triplate t1(21, 12, 'g');
+	string actualFilePath(unitTestsDataPath + "TripletWrite01_actual.txt");
+	string expectedFilePath(unitTestsDataPath + "TripletWrite01_expected.txt");
+
 	TriplateFile tf;
-	tf.Open("qwertyuiop");
-	tf.Write(t1);
+	tf.OpenWrite(actualFilePath);
+	tf.Write(Triplate(21, 12, 'g'));
+	tf.Write(Triplate(34, 43, 'f'));
 	tf.Close();
-	cout << tf.EndOfFile();*/
 
-	//BOOST_TEST(true /* test assertion */);
+	string actualContent = readFileContent(actualFilePath);
+	string expectedContent = readFileContent(expectedFilePath);
+
+	BOOST_TEST(expectedContent == actualContent);
 }
-

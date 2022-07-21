@@ -13,6 +13,9 @@
 # PyCharm Files
 **/.idea
 
+# Unit Tests Data
+**/*_actual*
+
 # Compiled Object files
 **/*.slo
 **/*.lo

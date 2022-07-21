@@ -12,6 +12,9 @@
 
 #include <iostream>
 #include <fstream>
+#include <string>
+#include <streambuf>
+
 using namespace std;
 
 #include <boost/test/unit_test.hpp>

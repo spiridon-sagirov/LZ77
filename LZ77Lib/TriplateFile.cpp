@@ -8,7 +8,7 @@
 
 void TriplateFile::OpenWrite(string FileName)
 {
-	f.open(FileName, std::ios_base::app);
+	f.open(FileName, ios::out);
 	if (!f)
 	{
 		throw "File creation failed";
@@ -27,7 +27,7 @@ void TriplateFile::OpenRead(string FileName)
 void TriplateFile::Write(Triplate t)
 {
 	if (f.is_open())
-		f << "(" << t.back << "," << t.forward << "," << t.theNextChar << ")";
+		f << "(" << t.back << "," << t.forward << "," << t.theNextChar << ")" << "\n";
 	else
 		throw "The file is closed, you need to open it";
 }
