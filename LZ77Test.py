@@ -5,7 +5,7 @@ import time
 import  os,csv
 
 #1, Run the LZ77.exe (or LZ77_fake.cmd at the beginning) to compress the input file
-inputFile="sourceFile.txt"
+inputFile="ReadMe.txt"
 outputFile="destination.txt"
 start_time=time.time();
 subprocess.run(["C:\\westernDigitalBootcamp\\LZ77\\lz77_fake.cmd", "compress",inputFile,outputFile])
@@ -34,7 +34,7 @@ print("the size of the decompressed file",sizeDecompressFile,"bytes")
 print(" The file has compressed by ",(sizeInputFile-sizeDecompressFile)/100," percent")
 
 #write the test output to excel file
-data=[inputFile,sizeInputFile,(sizeDecompressFile-sizeCompressFile)/100,total_compress_time,total_decompress_time,'aaffff5']
+data=[inputFile,sizeInputFile,(sizeDecompressFile-sizeCompressFile)/100,total_compress_time,total_decompress_time,'tamarr']
 with open('TestOutput.csv', 'a',newline="") as f:
     writer = csv.writer(f)
     writer.writerow(data)
