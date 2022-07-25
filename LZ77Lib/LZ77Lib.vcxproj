@@ -127,12 +127,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="SlidingWindow.h" />
     <ClInclude Include="Triplate.h" />
     <ClInclude Include="TriplateFile.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SlidingWindow.cpp" />
     <ClCompile Include="Triplate.cpp" />
     <ClCompile Include="TriplateFile.cpp" />
     <ClCompile Include="stdafx.cpp">
