@@ -4,15 +4,15 @@ using namespace std;
 class SlidingWindow
 {
 public:
-	int* buffer;
-	fstream searchBuffer;
-	int* 
-	int size;
+	char* buffer;
+	fstream pointer;
+	char* searchBuffer, * lookAheadBuffer;
+	int searchBufferSize, lookAheadBufferSize,size;
 
-	void OpenRead(string filePath,int searchBufferSize, int lookAheadBufferSize);
-	//GetBuffers(*searchBuffer, *lookAheadBuffer);
-	//Read(bytesCount);
+	void OpenRead(string filePath);
+	void Read(int bytesCount);
 	bool EndOfFile();
 	//Write(buffer)
-	//Close()
+	void Close();
+
 };
