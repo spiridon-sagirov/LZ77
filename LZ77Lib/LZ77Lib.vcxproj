@@ -134,6 +134,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Lcs.cpp" />
     <ClCompile Include="SlidingWindow.cpp" />
     <ClCompile Include="Triplate.cpp" />
     <ClCompile Include="TriplateFile.cpp" />

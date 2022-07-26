@@ -151,6 +151,7 @@
     <ClInclude Include="TripletFileTests.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="LcsTests.cpp" />
     <ClCompile Include="LZ77UnitTests.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
