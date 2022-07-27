@@ -1,14 +1,15 @@
 #include "stdafx.h"
-char* lcs(char* str1, char* str2) {
+
+string lcs(char* str1, char* str2) {
     int len1 = strlen(str1);
-    int  len2 = strlen(str2);
+    int len2 = strlen(str2);
     int result = 0;
-    int** mat = (int**)calloc(len1, sizeof(int*));
-    for (int i = 0;i < len1 + 1;i++)
-        mat[i] = (int*)calloc(len2, sizeof(int));
-    for (int i = 0;i <= len1;i++)
+    int** mat = (int**)calloc(len1 + 1, sizeof(int*));
+    for (int i = 0; i <= len1; i++)
+        mat[i] = (int*)calloc(len2 + 1, sizeof(int));
+    for (int i = 0; i <= len1; i++)
     {
-        for (int j = 0;j <= len2;j++)
+        for (int j = 0; j <= len2; j++)
         {
             if (i == 0 || j == 0)
                 mat[i][j] = 0;
@@ -21,19 +22,18 @@ char* lcs(char* str1, char* str2) {
                 mat[i][j] = 0;
         }
     }
-    for (int i = 0;i < 8;i++)
-    {
-        for (int j = 0;j < 8;j++)
-        {
+    //for (int i = 0;i < 8;i++)
+    //{
+    //    for (int j = 0;j < 8;j++)
+    //    {
 
-            cout << mat[i][j] << " ";
-        }
-        cout << "\n";
-    }
+    //        cout << mat[i][j] << " ";
+    //    }
+    //    cout << "\n";
+    //}
 
     int index = result;
-    char* lcs = (char*)malloc(sizeof(char) * (index + 1));
-    lcs[index] = '\0';
+    string lcs = string(index, ' ');
     for (int i = len1;i >= 0;i--) {
         for (int j = len2;j >= 0;j--) {
             if (mat[i][j] == result) {
@@ -48,6 +48,11 @@ char* lcs(char* str1, char* str2) {
             }
         }
     }
-    cout << "LCS of " << str1 << " and " << str2 << " is " << lcs;
+
+    for (int i = 0; i <= len1; i++)
+        free(mat[i]);
+    free(mat);
+
+    //cout << "LCS of " << str1 << " and " << str2 << " is " << lcs;
     return lcs;
 }

@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Lcs.h" />
     <ClInclude Include="SlidingWindow.h" />
     <ClInclude Include="Triplate.h" />
     <ClInclude Include="TriplateFile.h" />
