@@ -1,10 +1,9 @@
 #include "stdafx.h"
+#include "LZ77UnitTests.h"
 #include "TripletFileTests.h"
 
 #include "..\LZ77Lib\Triplet.h"
 #include "..\LZ77Lib\TripletFileText.h"
-
-string unitTestsDataPath("..\\LZ77UnitTests\\UnitTestsData\\");
 
 string readFileContent(const string& filePath)
 {
@@ -16,8 +15,8 @@ string readFileContent(const string& filePath)
 
 void triplet_test_write()
 {
-	string actualFilePath(unitTestsDataPath + "TripletWrite01_actual.txt");
-	string expectedFilePath(unitTestsDataPath + "TripletWrite01_expected.txt");
+	string actualFilePath(getUnitTestsDataPath() + "TripletWrite01_actual.txt");
+	string expectedFilePath(getUnitTestsDataPath() + "TripletWrite01_expected.txt");
 
 	TripletFileText tf;
 	tf.OpenWrite(actualFilePath);
@@ -33,7 +32,7 @@ void triplet_test_write()
 
 void triplet_test_read()
 {
-	string inputFilePath(unitTestsDataPath + "TripletRead01_input.txt");
+	string inputFilePath(getUnitTestsDataPath() + "TripletRead01_input.txt");
 
 	TripletFileText tf;
 	tf.OpenRead(inputFilePath);
