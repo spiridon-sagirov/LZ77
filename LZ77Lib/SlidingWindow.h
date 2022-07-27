@@ -1,13 +1,22 @@
+#pragma once
+#include "Buffer.h"
 
-
-using namespace std;
 class SlidingWindow
 {
 public:
-	char* buffer;
 	fstream pointer;
-	char* searchBuffer, * lookAheadBuffer;
-	int searchBufferSize, lookAheadBufferSize,size;
+
+	Buffer buffer;
+	//char* searchBuffer;
+	//char* lookAheadBuffer;
+	Buffer searchBuffer;
+	Buffer lookAheadBuffer;
+
+	int searchBufferSize;
+	int lookAheadBufferSize;
+
+	SlidingWindow(int searchBufferSize, int lookAheadBufferSize);
+	~SlidingWindow();
 
 	void OpenRead(string filePath);
 	void Read(int bytesCount);

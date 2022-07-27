@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Buffer.h" />
     <ClInclude Include="ITripletFile.h" />
     <ClInclude Include="Lcs.h" />
     <ClInclude Include="SlidingWindow.h" />
@@ -137,6 +138,7 @@
     <ClInclude Include="TripletFileText.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Buffer.cpp" />
     <ClCompile Include="Lcs.cpp" />
     <ClCompile Include="SlidingWindow.cpp" />
     <ClCompile Include="stdafx.cpp">
