@@ -1,10 +1,10 @@
 // LZ77.cpp : Defines the entry point for the console application.
 //
 #include "stdafx.h"
-#include <iostream>
-#include <fstream>
-#include <string>
-using namespace std;
+//#include <iostream>
+//#include <fstream>
+//#include <string>
+//using namespace std;
 
 
 int Lz77(string sourseFile,string destinationFile, int buffer) {
@@ -29,17 +29,24 @@ int Lz77(string sourseFile,string destinationFile, int buffer) {
 	return 0;
 }
 
-void shelllz77(string comand,string pathDecompress,string pathCompress,int buffer) {
-	if (comand == "compress")
+//void main(string comand,string pathDecompress,string pathCompress,int buffer) {
+void main(int argc, char** argv) {
+	string command(argv[1]);
+	string pathDecompress(argv[2]);
+	string pathCompress(argv[3]);
+	int buffer = atoi(argv[4]);
+
+    cout << "work";
+	if (command == "compress")
 		Lz77(pathDecompress, pathCompress, buffer);
-	else if(comand == "decompress")
+	else if(command == "decompress")
 		Lz77(pathCompress,pathDecompress, buffer);
 }
-int main() {
-
-	shelllz77("compress", "image.jpg", "destinationFile.jpg",3);
-
-	shelllz77("compress", "source.jpg", "destination.jpg",3);
-
-}
+//int main() {
+//
+//	shelllz77("compress", "image.jpg", "destinationFile.jpg",3);
+//
+//	shelllz77("compress", "source.jpg", "destination.jpg",3);
+//
+//}
 
