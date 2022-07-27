@@ -173,6 +173,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Text Include="UnitTestsData\TripletRead01_input.txt" />
     <Text Include="UnitTestsData\TripletWrite01_actual.txt" />
     <Text Include="UnitTestsData\TripletWrite01_expected.txt" />
   </ItemGroup>

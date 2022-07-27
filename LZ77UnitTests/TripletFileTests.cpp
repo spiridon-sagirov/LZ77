@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "TripletFileTests.h"
 
-#include "..\LZ77Lib\Triplate.h"
-#include "..\LZ77Lib\TriplateFile.h"
+#include "..\LZ77Lib\Triplet.h"
+#include "..\LZ77Lib\TripletFileText.h"
 
 string unitTestsDataPath("..\\LZ77UnitTests\\UnitTestsData\\");
 
@@ -14,19 +14,38 @@ string readFileContent(const string& filePath)
 	return stringStream.str();
 }
 
-void triplet_test_sample()
+void triplet_test_write()
 {
 	string actualFilePath(unitTestsDataPath + "TripletWrite01_actual.txt");
 	string expectedFilePath(unitTestsDataPath + "TripletWrite01_expected.txt");
 
-	TriplateFile tf;
+	TripletFileText tf;
 	tf.OpenWrite(actualFilePath);
-	tf.Write(Triplate(21, 12, 'g'));
-	tf.Write(Triplate(34, 43, 'f'));
+	tf.Write(Triplet(21, 12, 'g'));
+	tf.Write(Triplet(34, 43, 'f'));
 	tf.Close();
 
 	string actualContent = readFileContent(actualFilePath);
 	string expectedContent = readFileContent(expectedFilePath);
 
 	BOOST_TEST(expectedContent == actualContent);
+}
+
+void triplet_test_read()
+{
+	string inputFilePath(unitTestsDataPath + "TripletRead01_input.txt");
+
+	TripletFileText tf;
+	tf.OpenRead(inputFilePath);
+
+	BOOST_TEST(!tf.EndOfFile());
+
+	Triplet triplet1 = tf.Read();
+	Triplet triplet2 = tf.Read();
+
+	BOOST_TEST(triplet1.equals(Triplet(21, 12, 'g')));
+	BOOST_TEST(triplet2.equals(Triplet(34, 43, 'f')));
+	BOOST_TEST(tf.EndOfFile());
+
+	tf.Close();
 }

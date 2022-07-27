@@ -15,6 +15,7 @@ test_suite* init_unit_test_suite(int argc, char* argv[])
 	framework::master_test_suite().add(BOOST_TEST_CASE(&lcs_test_first_input_is_empty));
 	framework::master_test_suite().add(BOOST_TEST_CASE(&lcs_test_second_input_is_empty));
 
-	framework::master_test_suite().add(BOOST_TEST_CASE(&triplet_test_sample));
+	framework::master_test_suite().add(BOOST_TEST_CASE(&triplet_test_write));
+	framework::master_test_suite().add(BOOST_TEST_CASE(&triplet_test_read));
 	return 0;
 }
