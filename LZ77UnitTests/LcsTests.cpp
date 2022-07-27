@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "LcsTests.h"
-
 #include "..\LZ77Lib\Lcs.h"
 
 void lcs_test_common_substring_exist()

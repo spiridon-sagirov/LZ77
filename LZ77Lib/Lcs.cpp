@@ -31,7 +31,8 @@ string lcs(char* str1, char* str2) {
     //    }
     //    cout << "\n";
     //}
-
+    if (result == 0)
+        return "";
     int index = result;
     string lcs = string(index, ' ');
     for (int i = len1;i >= 0;i--) {

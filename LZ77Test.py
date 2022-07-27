@@ -5,29 +5,28 @@ import time
 import  os,csv
 
 #1, Run the LZ77.exe (or LZ77_fake.cmd at the beginning) to compress the input file
-def run(inputFile,outputFile,action):
-    start_time=time.time();
-    subprocess.run(["C:\\westernDigitalBootcamp\\LZ77\\x64\\Debug\\LZ77.exe",action,inputFile,outputFile])
-    calaulateTime(start_time,action)
-    calaulateSize(inputFile,outputFile,action)
+def run(OriginalFile,compressFile,decompressFile):
+    start_time_compress=time.time()
+    subprocess.run([r"C:\westernDigitalBootcamp\LZ77\Debug\LZ77.exe", "compress", OriginalFile, compressFile, "5"])
+    calaulateTime(start_time_compress)
+    calaulateSizePercent(inputFile, outputFile, action)
+
+    #start_time_decompress = time.time();
+   # subprocess.run([r"C:\westernDigitalBootcamp\LZ77\Debug\LZ77.exe", "decompress", compressFile, decompressFile, "5"])
+
     calaulateSize()
 
-#2. Calculate the time spent in the compression
-#5. Calculate the time spent in decompression
-
-def calaulateTime(startTime,action):
-    total_compress_time=time.time()-startTime;
-    print("the time spent in the ",action,total_compress_time);
+# Calculate the time spent in the compression/decompression
+def calaulateTime(startTime):
+    total_compress_time=time.time()-startTime
+    return total_compress_time
 
 # 3. Calculate the size of the compressed file
 #6. Compare the decompressed file with the original one
-
-def calaulateSize(inputFile,outputFile,action):
-    sizeCompressFile = os.stat(outputFile).st_size
+def calaulateSizePercent(inputFile,outputFile,action):
+    sizeOutputFile = os.stat(outputFile).st_size
     sizeInputFile=os.stat(inputFile).st_size
-    print("the size of the ",action, "file",sizeCompressFile,"bytes")
-    print(" The file has ",action," by ",(sizeInputFile-sizeCompressFile)/100," percent")
-    return sizeCompressFile
+    return (sizeInputFile-sizeCompressFile)/100
 
 #write the test output to excel file
 
