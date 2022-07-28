@@ -23,12 +23,9 @@ void TripletFileBinary::OpenWrite(string FileName)
 
 void TripletFileBinary::Write(Triplet t)
 {
-	int num = t.back;
-	f.write((char*)& num , sizeof(num));
-    num = t.forward;
-	f.write((char*)& num, sizeof(num));
-	char ch = t.theNextChar;
-	f.write((char*)& ch, sizeof(ch));
+	f.write((char*)& t.back, sizeof(t.back));
+	f.write((char*)& t.forward, sizeof(t.forward));
+	f.write((char*)& t.theNextChar, sizeof(t.theNextChar));
 }
 
 void TripletFileBinary::Close()
@@ -39,12 +36,22 @@ void TripletFileBinary::Close()
 
 Triplet TripletFileBinary::Read()
 {
-	return Triplet();
+	Triplet t;
+	if (!f.eof())
+	{
+		f.read((char*)& t.back, sizeof(t.back));
+		f.read((char*)& t.back, sizeof(t.back));
+		f.read((char*)& t.theNextChar, sizeof(t.theNextChar));
+		return t;
+	}
+	else
+	{
+		throw "The file is empty";
+	}
+
 }
 
 bool TripletFileBinary::EndOfFile()
 {
-	if (!f.eof())
-		return false;
-	return true;
+	return f.eof();
 }
