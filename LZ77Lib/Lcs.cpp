@@ -22,17 +22,13 @@ string lcs(char* str1, char* str2) {
                 mat[i][j] = 0;
         }
     }
-    //for (int i = 0;i < 8;i++)
-    //{
-    //    for (int j = 0;j < 8;j++)
-    //    {
-
-    //        cout << mat[i][j] << " ";
-    //    }
-    //    cout << "\n";
-    //}
-    if (result == 0)
-        return "";
+    if (result == 0) {
+        for (int i = 0; i <= len1; i++)
+            free(mat[i]);
+        free(mat);
+  return "";
+    }
+      
     int index = result;
     string lcs = string(index, ' ');
     for (int i = len1;i >= 0;i--) {

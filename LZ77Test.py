@@ -8,12 +8,11 @@ import os,csv
 def run(OriginalFile,compressFile,decompressFile):
     start_time_compress=time.time()
     subprocess.run([r"C:\westernDigitalBootcamp\LZ77\Debug\LZ77.exe", "compress", OriginalFile, compressFile, "5"])
-
     ctc=calaulateTime(start_time_compress)
     ctp=calaulateSizePercent(OriginalFile, compressFile)
     start_time_decompress = time.time()
-    time.sleep(1.0)
-    subprocess.run([r"C:\westernDigitalBootcamp\LZ77\lz77_fake.cmd", "decompress", compressFile, decompressFile, "5"])
+    time.sleep(1)
+    # subprocess.run([r"C:\westernDigitalBootcamp\LZ77\Debug\LZ77.exe", "decompress", compressFile, decompressFile, "5"])
     ctd=calaulateTime(start_time_decompress)
     cf=compareOfileAndDfile(OriginalFile, decompressFile)
     writeToClv(OriginalFile, ctc, ctp, ctd, cf)
