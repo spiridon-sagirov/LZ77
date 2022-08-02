@@ -49,8 +49,8 @@ int Lz77(string sourseFile, string destinationFile, int buffer) {
 //void main(string comand,string pathDecompress,string pathCompress,int buffer) {
 void main(int argc, char** argv) {
 	string command(argv[1]);
-	string pathDecompress(argv[2]);
-	string pathCompress(argv[3]);
+	string pathCompress(argv[2]);
+	string pathDecompress(argv[3]);
 	int buffer = atoi(argv[4]);
 
     cout << "work";
