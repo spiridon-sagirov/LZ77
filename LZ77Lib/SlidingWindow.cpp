@@ -73,21 +73,24 @@ bool SlidingWindow::EndOfFile()
 	return pointer.eof();	
 }
 
-void SlidingWindow::OpenWrite(string filePath)
+void SlidingWindow::OpenWrite(string filePath,int searchBufferSize)
 {
 	pointer = fstream(filePath, ios::binary | ios::in);
-	pointer.read(buffer.firstByte, buffer.size);
-	searchBuffer.firstByte = buffer.firstByte;
 	searchBuffer.size = 0;
+	searchBuffer.firstByte = buffer.firstByte;
 }
 
-void SlidingWindow::Write(Triplet triplet)
+void SlidingWindow::Write(string str)
 {
-	string WriteToFile;
-	searchBuffer.firstByte -= triplet.back;  
-
-
-	WriteToFile = triplet.back;
+	
+	if (searchBuffer.size > searchBufferSize) 
+	{
+		for (int i = 0;i < searchBuffer.size - searchBufferSize;i++)
+		{
+           
+	    }
+    }
+	
 }
 
 void SlidingWindow::Close() 
