@@ -1,17 +1,34 @@
 // LZ77.cpp : Defines the entry point for the console application.
 //
 #include "stdafx.h"
-//#include <iostream>
-//#include <fstream>
-//#include <string>
-//using namespace std;
+#include "../LZ77Lib/SlidingWindow.h"
+#include "../LZ77Lib/Lcs.h"
+#include "../LZ77Lib/Triplet.h"
+#include "../LZ77Lib/TripletFileText.h"
+//#include "../LZ77Lib/TripletFileBinary.h"
 
+int Lz77(string sourseFile, string destinationFile, int buffer) {
+	/*fstream in(sourseFile, ios::binary | ios::in);
+	fstream out(destinationFile, ios::binary | ios::out);*/
 
-int Lz77(string sourseFile,string destinationFile, int buffer) {
-	fstream in(sourseFile, ios::binary | ios::in);
-	fstream out(destinationFile, ios::binary | ios::out);
+	TripletFileText tf;
+	Triplet t;
+	SlidingWindow s(6, 4);
+	s.OpenRead(sourseFile);
+	tf.OpenWrite(destinationFile);
+	while ()
+	{
+		string str = lcs(s.searchBuffer.firstByte, s.lookAheadBuffer.firstByte);
+		int byteCount = str.length();
+		s.Read(byteCount);
+		t.back = ;
+		t.forward = byteCount;
+		t.theNextChar = ;
+		tf.Write(t);
+	}
+}
  
-	char ch;
+	/*char ch;
 	while (!in.eof())
 	{
 		string res = "";
@@ -27,7 +44,7 @@ int Lz77(string sourseFile,string destinationFile, int buffer) {
 	in.close();
 	out.close();
 	return 0;
-}
+}*/
 
 //void main(string comand,string pathDecompress,string pathCompress,int buffer) {
 void main(int argc, char** argv) {

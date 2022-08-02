@@ -20,6 +20,7 @@ void SlidingWindow::OpenRead(string filePath)
 	 pointer = fstream(filePath, ios::binary | ios::in);
 	 pointer.read(buffer.firstByte, buffer.size);
 	 searchBuffer.firstByte = buffer.firstByte;
+	 searchBuffer.size = 0;
 	 lookAheadBuffer.firstByte = buffer.firstByte;
 	 lookAheadBuffer.size = lookAheadBufferSize;
 }
@@ -35,14 +36,11 @@ void SlidingWindow::Read(int bytesCount)
 	else
 	{
 		int x = searchBuffer.size + bytesCount - searchBufferSize;
-		if (pointer.eof()) {
+		if (EndOfFile()) {
 			searchBuffer.firstByte += bytesCount;
 			lookAheadBuffer.firstByte = searchBuffer.firstByte + searchBufferSize;
 			lookAheadBuffer.size -= bytesCount;
 		}
-		//cout << &pointer.end<<endl;
-		//cout << &pointer.cur<<endl;
-
 		else if (pointer.end - pointer.cur >= x )
 		{
 			for (int i = 0; i < buffer.size - x - 1; i++)
@@ -56,7 +54,6 @@ void SlidingWindow::Read(int bytesCount)
 		}
 		else
 		{
-			
 			int y = pointer.end - pointer.cur;
 			for (int i = 0; i <= buffer.size - y - 1; i++)
 			{
@@ -67,9 +64,6 @@ void SlidingWindow::Read(int bytesCount)
 			pointer.read(&(buffer.firstByte[buffer.size -y ]), y+1);
 			lookAheadBuffer.firstByte = y + &(buffer.firstByte[searchBuffer.size]);
 			lookAheadBuffer.size -= y;
-
-			
-
 		}
 	}
 }
@@ -79,18 +73,24 @@ bool SlidingWindow::EndOfFile()
 	return pointer.eof();	
 }
 
+void SlidingWindow::OpenWrite(string filePath)
+{
+	pointer = fstream(filePath, ios::binary | ios::in);
+	pointer.read(buffer.firstByte, buffer.size);
+	searchBuffer.firstByte = buffer.firstByte;
+	searchBuffer.size = 0;
+}
+
+void SlidingWindow::Write(Triplet triplet)
+{
+	string WriteToFile;
+	searchBuffer.firstByte -= triplet.back;  
+
+
+	WriteToFile = triplet.back;
+}
+
 void SlidingWindow::Close() 
 {
 	pointer.close();
 }
-
-/*if (lookAheadBuffer + bytesCount + lookAheadBufferSize < &buffer[size - 1])
-	{
-		lookAheadBuffer += bytesCount;
-	}
-	else
-	{
-		buffer = &(buffer[bytesCount]);
-		pointer.read(&buffer[size-bytesCount], bytesCount);
-		pointer.seekg(bytesCount, ios::cur);
-	}*/
