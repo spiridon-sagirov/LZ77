@@ -1,4 +1,4 @@
 #pragma once
 
-void lcs(char* search, char* lookahead, int* index, int* length);
-string stringOfLcs(char * str1, char* str2);
+void lcs(string search,string lookahead, unsigned int* index, unsigned int* length);
+string stringOfLcs(string str1, string str2);

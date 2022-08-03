@@ -1,15 +1,15 @@
 #include "stdafx.h"
 #include "SlidingWindow.h"
 
-SlidingWindow::SlidingWindow(int searchBufferSize, int lookAheadBufferSize)
-	: buffer(new char[searchBufferSize + lookAheadBufferSize], searchBufferSize + lookAheadBufferSize)
+SlidingWindow::SlidingWindow(unsigned int searchBufferSize, unsigned int lookAheadBufferSize)
+	: buffer(new char[searchBufferSize + lookAheadBufferSize + 1], searchBufferSize + lookAheadBufferSize)
 	, searchBuffer(NULL, 0)
 	, lookAheadBuffer(NULL, 0)
 {
 	this->searchBufferSize = searchBufferSize;
 	this->lookAheadBufferSize = lookAheadBufferSize;
 }
-SlidingWindow::SlidingWindow(int searchBufferSize)
+SlidingWindow::SlidingWindow(unsigned int searchBufferSize)
 	: buffer(new char[searchBufferSize], searchBufferSize)
 	, searchBuffer(NULL, 0)
 	, lookAheadBuffer(NULL, 0)
@@ -32,7 +32,7 @@ void SlidingWindow::OpenRead(string filePath)
 	 lookAheadBuffer.size = lookAheadBufferSize;
 }
 
-void SlidingWindow::Read(int bytesCount)
+void SlidingWindow::Read(unsigned int bytesCount)
 {
 	
 	if (searchBuffer.size + bytesCount <= searchBufferSize)
@@ -43,14 +43,14 @@ void SlidingWindow::Read(int bytesCount)
 	else
 	{
 		int x = searchBuffer.size + bytesCount - searchBufferSize;
-		if (EndOfFile()) {
+		if (pointer.eof()) {
 			searchBuffer.firstByte += bytesCount;
 			lookAheadBuffer.firstByte = searchBuffer.firstByte + searchBufferSize;
-			lookAheadBuffer.size -= bytesCount;
+			lookAheadBuffer.size = max((int)(lookAheadBuffer.size - bytesCount),0);
 		}
 		else if (pointer.end - pointer.cur >= x )
 		{
-			for (int i = 0; i < buffer.size - x - 1; i++)
+			for (unsigned int i = 0; i < buffer.size - x - 1; i++)
 			{
 				buffer.firstByte[i] = buffer.firstByte[i + x];
 			}
@@ -62,7 +62,7 @@ void SlidingWindow::Read(int bytesCount)
 		else
 		{
 			int y = pointer.end - pointer.cur;
-			for (int i = 0; i <= buffer.size - y - 1; i++)
+			for (unsigned int i = 0; i <= buffer.size - y - 1; i++)
 			{
     				buffer.firstByte[i] = buffer.firstByte[i + y];
 			}
@@ -70,14 +70,15 @@ void SlidingWindow::Read(int bytesCount)
 			searchBuffer.size = searchBufferSize;
 			pointer.read(&(buffer.firstByte[buffer.size -y ]), y+1);
 			lookAheadBuffer.firstByte = y + &(buffer.firstByte[searchBuffer.size]);
-			lookAheadBuffer.size -= y;
+			lookAheadBuffer.size = max((int)(lookAheadBuffer.size - y), 0);
+			
 		}
 	}
 }
 
 bool SlidingWindow::EndOfFile() 
 {
-	return pointer.eof();	
+	return lookAheadBuffer.size == 0;
 }
 
 void SlidingWindow::OpenWrite(string filePath)
@@ -91,7 +92,7 @@ void SlidingWindow::Write(string str)
 {
 	if (searchBuffer.size + str.length() <= searchBufferSize)
 	{
-		for (int i = 0; i < str.length(); i++)
+		for (unsigned int i = 0; i < str.length(); i++)
 		{
 			searchBuffer.firstByte[searchBuffer.size] =str[i];
 			searchBuffer.size ++;
@@ -99,8 +100,8 @@ void SlidingWindow::Write(string str)
 	}
 	else
 	{
-		int missingSize = searchBuffer.size + str.length() - searchBufferSize;
-		for (int i = missingSize, j = 0; i < searchBufferSize; i++, j++)
+		unsigned int missingSize = searchBuffer.size + str.length() - searchBufferSize;
+		for (unsigned int i = missingSize, j = 0; i < searchBufferSize; i++, j++)
 		{
 			if (j < missingSize)
 			{
@@ -109,7 +110,7 @@ void SlidingWindow::Write(string str)
 			}
 			searchBuffer.firstByte[j] = searchBuffer.firstByte[i];
 		}
-		for (int i = 0; i < str.length(); i++)
+		for (unsigned int i = 0; i < str.length(); i++)
 		{
 			searchBuffer.firstByte[searchBuffer.size] = str[i];
 			searchBuffer.size++;

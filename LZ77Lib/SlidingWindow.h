@@ -1,7 +1,7 @@
 #pragma once
 #include "Buffer.h"
-#include "TripletFileText.h";
-#include "Triplet.h";
+#include "TripletFileText.h"
+#include "Triplet.h"
 
 class SlidingWindow
 {
@@ -10,15 +10,15 @@ public:
 	Buffer buffer;
 	Buffer searchBuffer;
 	Buffer lookAheadBuffer;
-	int searchBufferSize;
-	int lookAheadBufferSize;
+	unsigned int searchBufferSize;
+	unsigned int lookAheadBufferSize;
 
-	SlidingWindow(int searchBufferSize, int lookAheadBufferSize);
-	SlidingWindow(int searchBufferSize);
+	SlidingWindow(unsigned int searchBufferSize, unsigned int lookAheadBufferSize);
+	SlidingWindow(unsigned int searchBufferSize);
 	~SlidingWindow();
 
 	void OpenRead(string filePath);
-	void Read(int bytesCount);
+	void Read(unsigned int bytesCount);
 	bool EndOfFile();
 	void OpenWrite(string filePath);
 	void Write(string str);

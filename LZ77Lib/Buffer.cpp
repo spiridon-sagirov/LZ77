@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Buffer.h"
 
-Buffer::Buffer(char* firstByte, int size)
+Buffer::Buffer(char* firstByte, unsigned int size)
 {
 	this->firstByte = firstByte;
 	this->size = size;

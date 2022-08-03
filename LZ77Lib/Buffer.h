@@ -3,9 +3,9 @@ class Buffer
 {
 public:
 	char* firstByte;
-	int size;
+	unsigned int size;
 
-	Buffer(char* firstByte, int size);
+	Buffer(char* firstByte, unsigned int size);
 
 	string getString();
 };

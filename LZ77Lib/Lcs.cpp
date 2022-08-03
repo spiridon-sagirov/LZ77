@@ -54,7 +54,7 @@
 //    //cout << "LCS of " << str1 << " and " << str2 << " is " << lcs;
 //    return lcs;
 //}
-void lcs(char* search, char* lookahead, int* index, int* length)
+void lcs(string search, string lookahead, unsigned int* index, unsigned int* length)
 {
     if ( search == "" || lookahead == "")
     {
@@ -62,15 +62,16 @@ void lcs(char* search, char* lookahead, int* index, int* length)
         *length = 0;
         return;
     }
-    int count = 0, index1 = 0, max = 0, inedxMax = 0,m;
-    for (int i = 0, j = 0; i <= strlen(search); i++)
+    unsigned int count = 0, index1 = 0, max1 = 0, indexMax = 0,m=0;
+    for (unsigned int i = 0, j = 0; i < search.length(); i++)
     {
+
         if (search[i] == lookahead[0])
         {
-            int j;
+            unsigned  int j=0;
             index1 = i;
             count++;
-            for (m = 1, j = i + 1;j < strlen(search);j++)
+            for (m = 1, j = i + 1;j < search.length();j++)
             {
                 if (search[j] == lookahead[m])
                 {
@@ -81,40 +82,42 @@ void lcs(char* search, char* lookahead, int* index, int* length)
                     break;
             }
             int i = 0;
-            if (j == strlen(search))
+            
+            if (j == search.length())
             {
                 int i = 0;
-                while (search[i] == lookahead[m]||search[strlen(search)-1]==lookahead[m])
+                while (search[i] == lookahead[m]||search[search.length() -1]==lookahead[m])
                 {
                     count++;
                     i++;
                     m++;
-                    if (i == strlen(search))
+                    if (i == search.length())
                         i = 0;
                 }
             }
-            if (count > max)
+            if (count > max1)
             {
-                max = count;
-                inedxMax = index1;
+                max1 = count;
+                indexMax = index1;
             }
             count = 0;
+            index1 = 0;
         }
     }
-    *index = inedxMax;
-    *length = max;
+    *index = indexMax;
+    *length = max1;
 }
 
-string stringOfLcs(char* search,char* lookahead)
-{    
-    int index = 0, length = 0,i;
+string stringOfLcs(string search, string lookahead)
+{
+    unsigned int index = 0, length = 0, i;
     lcs(search, lookahead, &index, &length);
     string res = "";
-    int m=0;
-    for ( i = index;length != 0;i++)
-    { 
-        if (i == strlen(search))
-        { 
+    int m = 0;
+    for (i = index; length != 0; i++)
+    {
+        if (i == search.length())
+        {
             res += res[m];
             m++;
             length--;
@@ -122,9 +125,9 @@ string stringOfLcs(char* search,char* lookahead)
         }
         else
         {
-       res += search[i];
-        length--;
-        } 
+            res += search[i];
+            length--;
+        }
     }
     return res;
 }
