@@ -9,6 +9,13 @@ SlidingWindow::SlidingWindow(int searchBufferSize, int lookAheadBufferSize)
 	this->searchBufferSize = searchBufferSize;
 	this->lookAheadBufferSize = lookAheadBufferSize;
 }
+SlidingWindow::SlidingWindow(int searchBufferSize)
+	: buffer(new char[searchBufferSize], searchBufferSize)
+	, searchBuffer(NULL, 0)
+	, lookAheadBuffer(NULL, 0)
+{
+	this->searchBufferSize = searchBufferSize;
+}
 
 SlidingWindow::~SlidingWindow()
 {
@@ -73,24 +80,41 @@ bool SlidingWindow::EndOfFile()
 	return pointer.eof();	
 }
 
-void SlidingWindow::OpenWrite(string filePath,int searchBufferSize)
+void SlidingWindow::OpenWrite(string filePath)
 {
-	pointer = fstream(filePath, ios::binary | ios::in);
+	pointer = fstream(filePath, ios::binary | ios::out);
 	searchBuffer.size = 0;
-	searchBuffer.firstByte = buffer.firstByte;
+	searchBuffer.firstByte=buffer.firstByte;
 }
 
 void SlidingWindow::Write(string str)
 {
-	
-	if (searchBuffer.size > searchBufferSize) 
+	if (searchBuffer.size + str.length() <= searchBufferSize)
 	{
-		for (int i = 0;i < searchBuffer.size - searchBufferSize;i++)
+		for (int i = 0; i < str.length(); i++)
 		{
-           
-	    }
+			searchBuffer.firstByte[searchBuffer.size] =str[i];
+			searchBuffer.size ++;
+		}
+	}
+	else
+	{
+		int missingSize = searchBuffer.size + str.length() - searchBufferSize;
+		for (int i = missingSize, j = 0; i < searchBufferSize; i++, j++)
+		{
+			if (j < missingSize)
+			{
+				pointer << searchBuffer.firstByte[j];
+				searchBuffer.size--;
+			}
+			searchBuffer.firstByte[j] = searchBuffer.firstByte[i];
+		}
+		for (int i = 0; i < str.length(); i++)
+		{
+			searchBuffer.firstByte[searchBuffer.size] = str[i];
+			searchBuffer.size++;
+		}
     }
-	
 }
 
 void SlidingWindow::Close() 

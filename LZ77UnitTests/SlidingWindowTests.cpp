@@ -39,4 +39,24 @@ void sliding_window_test_sample()
 	BOOST_TEST(slidingWindow.searchBuffer.getString() == string("eexaac"));
 	BOOST_TEST(slidingWindow.lookAheadBuffer.getString() == string(""));
 	slidingWindow.Close();
+
+	SlidingWindow slidingWindow1(6);
+	slidingWindow1.OpenWrite("newDestination.txt");
+	slidingWindow1.Write("a");
+	/*fstream file;
+	file.open("newDestination.txt", ios::in);
+	string str = "";
+	BOOST_TEST(file << str == );*/
+	BOOST_TEST(slidingWindow1.searchBuffer.getString() == string("a"));
+	slidingWindow1.Write("aax");
+	BOOST_TEST(slidingWindow1.searchBuffer.getString() == string("aaax"));
+	slidingWindow1.Write("xxe");
+	BOOST_TEST(slidingWindow1.searchBuffer.getString() == string("aaxxxe"));
+	slidingWindow1.Write("ex");
+	BOOST_TEST(slidingWindow1.searchBuffer.getString() == string("xxxeex"));
+	slidingWindow1.Write("a");
+	BOOST_TEST(slidingWindow1.searchBuffer.getString() == string("xxeexa"));
+	slidingWindow1.Write("ac");
+	BOOST_TEST(slidingWindow1.searchBuffer.getString() == string("eexaac"));
+
 }

@@ -14,12 +14,13 @@ public:
 	int lookAheadBufferSize;
 
 	SlidingWindow(int searchBufferSize, int lookAheadBufferSize);
+	SlidingWindow(int searchBufferSize);
 	~SlidingWindow();
 
 	void OpenRead(string filePath);
 	void Read(int bytesCount);
 	bool EndOfFile();
-	void OpenWrite(string filePath, int searchBufferSize);
+	void OpenWrite(string filePath);
 	void Write(string str);
 	void Close();
 
