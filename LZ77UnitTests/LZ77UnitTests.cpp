@@ -5,6 +5,7 @@
 #include "LZ77UnitTests.h"
 #include "LcsTests.h"
 #include "TripletFileTests.h"
+#include "TripletFileBTests.h"
 #include "SlidingWindowTests.h"
 
 string getUnitTestsDataPath()
@@ -23,7 +24,10 @@ test_suite* init_unit_test_suite(int argc, char* argv[])
 
 	framework::master_test_suite().add(BOOST_TEST_CASE(&triplet_test_write));
 	framework::master_test_suite().add(BOOST_TEST_CASE(&triplet_test_read));
-
+	
+	framework::master_test_suite().add(BOOST_TEST_CASE(&triplet_binary_test_write));
+	framework::master_test_suite().add(BOOST_TEST_CASE(&triplet_binary_test_read));
+	
 	framework::master_test_suite().add(BOOST_TEST_CASE(&sliding_window_test_sample));
 
 	return 0;

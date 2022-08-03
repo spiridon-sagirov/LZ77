@@ -5,7 +5,7 @@
 
 void TripletFileBinary::OpenRead(string FileName)
 {
-	f.open(FileName, ios::in | ios::binary);
+	f.open(FileName, ios::out | ios::binary | ios::in);
 	if (!f)
 	{
 		throw "File creation failed";
@@ -40,7 +40,7 @@ Triplet TripletFileBinary::Read()
 	if (!f.eof())
 	{
 		f.read((char*)& t.back, sizeof(t.back));
-		f.read((char*)& t.back, sizeof(t.back));
+		f.read((char*)& t.forward, sizeof(t.forward));
 		f.read((char*)& t.theNextChar, sizeof(t.theNextChar));
 		return t;
 	}
@@ -55,3 +55,4 @@ bool TripletFileBinary::EndOfFile()
 {
 	return f.eof();
 }
+
