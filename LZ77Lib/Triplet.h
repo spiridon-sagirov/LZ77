@@ -4,7 +4,7 @@ class Triplet
 {
 
 public:
-	int back;
+    int back;
 	int forward;
 	char theNextChar;
 	Triplet();
