@@ -43,17 +43,24 @@ Triplet TripletFileText::Read()
 	string text;
 	f >> text;
 	Triplet t1;
+	if (text == "") 
+	{
+		t1.back = 0;
+		t1.forward = 0;
+		return t1;
+	}
 	auto it = ++text.rbegin();
 	t1.theNextChar = *it;
 	it += 2;
 	string str = "";
-	for (it; it != text.rend() && *it != '(' && *it != ','; it++)
+	for (it; (it != text.rend()) && ( * it != '(' )&& ( * it != ','); it++)
 	{
 		str = *it + str;
 	}
 	t1.forward = stoi(str);
 	str = "";
-	for (++it; it != text.rend() && *it != '(' && *it != ','; it++)
+	for (++it; (it != text.rend()) 
+		&& (* it != '(' )&&(* it != ','); it++)
 	{
 		str = *it + str;
 	}

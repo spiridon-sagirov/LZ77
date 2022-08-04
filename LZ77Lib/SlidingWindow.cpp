@@ -10,7 +10,7 @@ SlidingWindow::SlidingWindow(unsigned int searchBufferSize, unsigned int lookAhe
 	this->lookAheadBufferSize = lookAheadBufferSize;
 }
 SlidingWindow::SlidingWindow(unsigned int searchBufferSize)
-	: buffer(new char[searchBufferSize], searchBufferSize)
+	: buffer(new char[searchBufferSize +100], searchBufferSize)
 	, searchBuffer(NULL, 0)
 	, lookAheadBuffer(NULL, 0)
 {
@@ -120,5 +120,9 @@ void SlidingWindow::Write(string str)
 
 void SlidingWindow::Close() 
 {
+	for(int i=0;i<searchBufferSize;i++)
+	{
+		pointer << searchBuffer.firstByte[i];
+	}
 	pointer.close();
 }

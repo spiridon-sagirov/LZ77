@@ -7,38 +7,69 @@
 #include "../LZ77Lib/TripletFileText.h"
 //#include "../LZ77Lib/TripletFileBinary.h"
 
-int Lz77(string sourceFile, string destinationFile, int buffer) {
-	/*fstream in(sourseFile, ios::binary | ios::in);
-	fstream out(destinationFile, ios::binary | ios::out);*/
-
-	/*TripletFileText tf;*/
-	//Triplet t;
-	SlidingWindow s(6, 4);
-	s.OpenRead(sourceFile);
-	/*tf.OpenWrite(destinationFile);*/
-	while (!s.EndOfFile())
+int Lz77(string command,string sourceFile, string destinationFile, int buffer) {
+	if (command == "compress")
 	{
-		unsigned int index = 0;
-		unsigned int length = 0;
-		string sb= s.searchBuffer.getString();
-		string slb = s.lookAheadBuffer.getString();
-		lcs(sb, slb, &index, &length);
-		//t.back =s.searchBuffer.size-index;
-		//t.forward = length;
-		if(length==s.lookAheadBuffer.size)
+		TripletFileText tf;
+		Triplet t;
+		SlidingWindow s(200, 100);
+		s.OpenRead(sourceFile);
+		tf.OpenWrite(destinationFile);
+		while (!s.EndOfFile())
 		{
-			s.Read(1);
-			length--;
+			unsigned int index = 0;
+			unsigned int length = 0;
+			string sb = s.searchBuffer.getString();
+			string slb = s.lookAheadBuffer.getString();
+			lcs(sb, slb, &index, &length);
+			t.back = s.searchBuffer.size - index;
+			t.forward = length;
+			if (length == s.lookAheadBuffer.size)
+			{
+				s.Read(1);
+				length--;
+			}
+			t.theNextChar = s.lookAheadBuffer.firstByte[length];
+			tf.Write(t);
+			s.Read(length + 1);
 		}
-		//t.theNextChar = s.lookAheadBuffer.firstByte[length];
-		/*tf.Write(t);*/
-		s.Read(length+1);
+		tf.Close();
+		return 0;
 	}
-	/*tf.Close();*/
-	return 0;
+	else
+	{
+		TripletFileText tf;
+		Triplet t;
+		SlidingWindow s(200);
+		string str = "";
+		s.OpenWrite(destinationFile);
+		tf.OpenRead(sourceFile);
+		while (!tf.EndOfFile())
+		{
+			t = tf.Read();
+			if (t.back==0 && t.forward==0 && t.theNextChar == '/n')
+			{
+				str = str;
+			}
+			else if (t.back == 0 && t.forward == 0 && t.theNextChar !='/n')
+			{
+				str = t.theNextChar;
+			}
+			else
+			{
+				for (int i = 0; i < t.forward; i++)
+				{
+					str += s.searchBuffer.firstByte[s.searchBuffer.size - t.back];
+				}
+				str += t.theNextChar;
+			}
+			s.Write(str);
+			str = "";
+		}
+		s.Close();
+		return 0;
+	}
 }
- 
-	
 
 //void main(string comand,string pathDecompress,string pathCompress,int buffer) {
 void main(int argc, char** argv) {
@@ -49,15 +80,8 @@ void main(int argc, char** argv) {
 
     cout << "work";
 	if (command == "compress")
-		Lz77(pathDecompress, pathCompress, buffer);
+		Lz77(command,pathCompress, pathDecompress, buffer);
 	else if(command == "decompress")
-		Lz77(pathCompress,pathDecompress, buffer);
+		Lz77(command,pathCompress,pathDecompress, buffer);
 }
-//int main() {
-//
-//	shelllz77("compress", "image.jpg", "destinationFile.jpg",3);
-//
-//	shelllz77("compress", "source.jpg", "destination.jpg",3);
-//
-//}
 

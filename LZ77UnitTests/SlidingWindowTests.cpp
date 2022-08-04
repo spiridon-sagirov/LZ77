@@ -3,6 +3,19 @@
 #include "SlidingWindowTests.h"
 
 #include "..\LZ77Lib\SlidingWindow.h"
+string InFile()
+{
+	string str = "";
+	char ch[2];
+	fstream file;
+	file.open("newDestination.txt", ios::in);
+	while (!file.eof())
+	{
+		file >> noskipws >> ch;
+		str += ch;
+	}
+	return str;
+}
 
 void sliding_window_test_sample()
 {
@@ -46,23 +59,41 @@ void sliding_window_test_sample()
 	BOOST_TEST(slidingWindow.lookAheadBuffer.getString() == string(""));
 	slidingWindow.Close();
 
+	string inFile = "";
 	SlidingWindow slidingWindow1(6);
 	slidingWindow1.OpenWrite("newDestination.txt");
 	slidingWindow1.Write("a");
-	/*fstream file;
-	file.open("newDestination.txt", ios::in);
-	string str = "";
-	BOOST_TEST(file << str == );*/
+	inFile = InFile();
+	BOOST_TEST( inFile == "");
 	BOOST_TEST(slidingWindow1.searchBuffer.getString() == string("a"));
 	slidingWindow1.Write("aax");
+	inFile = "";
+	inFile = InFile();
+	BOOST_TEST(inFile == "");
 	BOOST_TEST(slidingWindow1.searchBuffer.getString() == string("aaax"));
 	slidingWindow1.Write("xxe");
+	inFile = "";
+	inFile = InFile();
+	BOOST_TEST(inFile == "a");
 	BOOST_TEST(slidingWindow1.searchBuffer.getString() == string("aaxxxe"));
 	slidingWindow1.Write("ex");
+	inFile = "";
+	inFile = InFile();
+	BOOST_TEST(inFile == "aaa");
 	BOOST_TEST(slidingWindow1.searchBuffer.getString() == string("xxxeex"));
 	slidingWindow1.Write("a");
+	inFile = "";
+	inFile = InFile();
+	BOOST_TEST(inFile == "aaax");
 	BOOST_TEST(slidingWindow1.searchBuffer.getString() == string("xxeexa"));
 	slidingWindow1.Write("ac");
+	inFile = "";
+	inFile = InFile();
+	BOOST_TEST(inFile == "aaaxxx");
 	BOOST_TEST(slidingWindow1.searchBuffer.getString() == string("eexaac"));
+	slidingWindow1.Close();
+	
+
 
 }
+
