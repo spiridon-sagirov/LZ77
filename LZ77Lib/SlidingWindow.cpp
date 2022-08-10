@@ -88,7 +88,12 @@ void SlidingWindow::Read(unsigned int bytesCount)
 
 bool SlidingWindow::EndOfFile() 
 {
-	return lookAheadBuffer.size == 0;
+	//return lookAheadBuffer.size == 0;
+	int a = pointer.tellp();
+	pointer.seekg(0, ios::end);
+	int ii = pointer.tellp();
+	pointer.seekg((a));
+	return a==ii;
 }
 
 void SlidingWindow::OpenWrite(string filePath)
