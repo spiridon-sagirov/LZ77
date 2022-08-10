@@ -34,55 +34,51 @@ void SlidingWindow::OpenRead(string filePath)
 
 void SlidingWindow::Read(unsigned int bytesCount)
 {
-	
 	if (searchBuffer.size + bytesCount <= searchBufferSize)
 	{
 		searchBuffer.size += bytesCount;
 		lookAheadBuffer.firstByte = &(buffer.firstByte[searchBuffer.size]);
+		return;
+	}
+
+	int x = searchBuffer.size + bytesCount - searchBufferSize;
+	if (pointer.eof()) 
+	{
+		searchBuffer.firstByte += bytesCount;
+		lookAheadBuffer.firstByte = searchBuffer.firstByte + searchBufferSize;
+		lookAheadBuffer.size = max((int)(lookAheadBuffer.size - bytesCount),0);
+		return;
+	}
+
+	int as = pointer.tellp();
+	pointer.seekg(0, ios::end);
+	int ii = pointer.tellg();
+	if ( ii-as >= x)
+	{
+		pointer.seekg((as));
+		int aas=pointer.tellg();
+		for (unsigned int i = 0; i < buffer.size - x ; i++)
+		{
+			buffer.firstByte[i] = buffer.firstByte[i + x];
+		}
+		searchBuffer.firstByte = buffer.firstByte;
+		searchBuffer.size = searchBufferSize;
+		pointer.read(&(buffer.firstByte[buffer.size - x ]), x);
+		lookAheadBuffer.firstByte = &(buffer.firstByte[searchBuffer.size]);
 	}
 	else
 	{
-		int x = searchBuffer.size + bytesCount - searchBufferSize;
-		
-		if (pointer.eof()) {
-			searchBuffer.firstByte += bytesCount;
-			lookAheadBuffer.firstByte = searchBuffer.firstByte + searchBufferSize;
-			lookAheadBuffer.size = max((int)(lookAheadBuffer.size - bytesCount),0);
+		pointer.seekg((as));
+		int y = ii - pointer.tellg();
+		for (unsigned int i = 0; i <= buffer.size - y - 1; i++)
+		{
+			buffer.firstByte[i] = buffer.firstByte[i + y];
 		}
-		
-		else {
-			int as = pointer.tellp();
-			pointer.seekg(0, ios::end);
-			int ii = pointer.tellg();
-			if ( ii-as >= x)
-			{
-				pointer.seekg((as));
-				int aas=pointer.tellg();
-				for (unsigned int i = 0; i < buffer.size - x ; i++)
-				{
-					buffer.firstByte[i] = buffer.firstByte[i + x];
-				}
-				searchBuffer.firstByte = buffer.firstByte;
-				searchBuffer.size = searchBufferSize;
-				pointer.read(&(buffer.firstByte[buffer.size - x ]), x);
-				lookAheadBuffer.firstByte = &(buffer.firstByte[searchBuffer.size]);
-			}
-			else
-			{
-				pointer.seekg((as));
-				int y = ii - pointer.tellg();
-				for (unsigned int i = 0; i <= buffer.size - y - 1; i++)
-				{
-					buffer.firstByte[i] = buffer.firstByte[i + y];
-				}
-				searchBuffer.firstByte = &(buffer.firstByte[bytesCount - y]);
-				searchBuffer.size = searchBufferSize;
-				pointer.read(&(buffer.firstByte[buffer.size - y]), y + 1);
-				lookAheadBuffer.firstByte = y + &(buffer.firstByte[searchBuffer.size]);
-				lookAheadBuffer.size = max((int)(lookAheadBuffer.size - y), 0);
-
-			}
-		}
+		searchBuffer.firstByte = &(buffer.firstByte[bytesCount - y]);
+		searchBuffer.size = searchBufferSize;
+		pointer.read(&(buffer.firstByte[buffer.size - y]), y + 1);
+		lookAheadBuffer.firstByte = y + &(buffer.firstByte[searchBuffer.size]);
+		lookAheadBuffer.size = max((int)(lookAheadBuffer.size - y), 0);
 	}
 }
 
@@ -107,8 +103,6 @@ void SlidingWindow::Write(string str)
 {
 	if (searchBuffer.size + str.length() <= searchBufferSize)
 	{
-
-
 		for (unsigned int i = 0; i < str.length(); i++)
 		{
 			searchBuffer.firstByte[searchBuffer.size] =str[i];
