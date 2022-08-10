@@ -7,14 +7,28 @@ import os,csv
 # Run the LZ77.exe to compress the input file
 def run(originalFile,compressFile,decompressFile):
     start_time_compress=time.time()
-    subprocess.run([r"C:\westernDigitalBootcamp\LZ77\Debug\LZ77.exe", "compress", originalFile, compressFile, "5"])
+    os.chdir(r"C:\westernDigitalBootcamp\LZ77")
+    subprocess.run([r"C:\westernDigitalBootcamp\LZ77\Debug\LZ77.exe", "compress", originalFile, compressFile, "10"])
     ctc=calaulateTime(start_time_compress)
     ctp=calaulateSizePercent(originalFile, compressFile)
     start_time_decompress = time.time()
-    subprocess.run([r"C:\westernDigitalBootcamp\LZ77\Debug\LZ77.exe", "decompress", decompressFile, compressFile, "5"])
+    subprocess.run([r"C:\westernDigitalBootcamp\LZ77\Debug\LZ77.exe", "decompress", compressFile, decompressFile, "10"])
     ctd=calaulateTime(start_time_decompress)
     cf = compareOfileAndDfile(originalFile, decompressFile)
     writeToClv(originalFile, ctc, ctp, ctd, cf)
+    originalFileContent=readFile(originalFile)
+    decompressFileFileContent=readFile(decompressFile)
+    if(originalFileContent!=decompressFileFileContent):
+        print(originalFileContent)
+        print(decompressFileFileContent)
+        print("fail compress/decompress " + originalFile)
+
+
+def readFile(originalFile):
+    f = open(originalFile, "r")
+    return f.read()
+
+
 
 # Calculate the time spent in the compression/decompression
 def calaulateTime(startTime):
@@ -40,4 +54,10 @@ def writeToClv(OriginalFile,ctc,ctp,ctd,cf):
         writer = csv.writer(f)
         writer.writerow(data)
 
-run("tamar.txt","Compress.txt","deCompress.txt")
+
+run("input.txt","Compress.txt","deCompress.txt")
+run("input2.txt","Compress2.txt","deCompress2.txt")
+
+
+#run("empty.txt","enptyCompress.txt","emptydeCompress.txt")
+#run("image.jpg","Compress.jpg","deCompress.jpg")

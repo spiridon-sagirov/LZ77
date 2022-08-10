@@ -15,7 +15,7 @@ int Lz77(string command,string sourceFile, string destinationFile, int buffer) {
 		SlidingWindow s(6,4);
 		s.OpenRead(sourceFile);
 		tf.OpenWrite(destinationFile);
-		while (!s.EndOfFile())
+		while (s.lookAheadBuffer.size!=0)
 		{
 			unsigned int index = 0;
 			unsigned int length = 0;
@@ -93,7 +93,7 @@ void main(int argc, char** argv) {
 	string pathDecompress(argv[3]);
 	int buffer = atoi(argv[4]);
 
-    cout << "work";
+    cout << "comand:"<<command<<" pathCompress:"<< pathCompress<<" pathDecompress:"<< pathDecompress<<" buffer size:"<< buffer<<endl;
 	if (command == "compress")
 		Lz77(command,pathCompress, pathDecompress, buffer);
 	else if(command == "decompress")
