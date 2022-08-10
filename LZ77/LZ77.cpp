@@ -12,7 +12,7 @@ int Lz77(string command,string sourceFile, string destinationFile, int buffer) {
 	{
 		TripletFileText tf;
 		Triplet t;
-		SlidingWindow s(200, 100);
+		SlidingWindow s(6,4);
 		s.OpenRead(sourceFile);
 		tf.OpenWrite(destinationFile);
 		while (!s.EndOfFile())
@@ -22,7 +22,14 @@ int Lz77(string command,string sourceFile, string destinationFile, int buffer) {
 			string sb = s.searchBuffer.getString();
 			string slb = s.lookAheadBuffer.getString();
 			lcs(sb, slb, &index, &length);
-			t.back = s.searchBuffer.size - index;
+			if (length == 0) 
+			{
+				t.back = 0;
+			}
+			else
+			{
+				t.back = s.searchBuffer.size - index;
+			}
 			t.forward = length;
 			if (length == s.lookAheadBuffer.size)
 			{
@@ -40,7 +47,7 @@ int Lz77(string command,string sourceFile, string destinationFile, int buffer) {
 	{
 		TripletFileText tf;
 		Triplet t;
-		SlidingWindow s(200);
+		SlidingWindow s(6);
 		string str = "";
 		s.OpenWrite(destinationFile);
 		tf.OpenRead(sourceFile);
@@ -59,11 +66,19 @@ int Lz77(string command,string sourceFile, string destinationFile, int buffer) {
 			{
 				for (int i = 0; i < t.forward; i++)
 				{
-					str += s.searchBuffer.firstByte[s.searchBuffer.size - t.back];
+					if((s.searchBuffer.size - t.back + i) < s.searchBuffer.size)
+					{
+						str += s.searchBuffer.firstByte[s.searchBuffer.size - t.back + i];
+					}
+					else
+					{
+						str += s.searchBuffer.firstByte[s.searchBuffer.size - t.back];
+					}
 				}
 				str += t.theNextChar;
 			}
 			s.Write(str);
+			
 			str = "";
 		}
 		s.Close();
