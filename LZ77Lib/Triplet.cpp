@@ -6,7 +6,7 @@ Triplet::Triplet()
 {
 }
 
-Triplet::Triplet( int back,  int forward, char theNextChar)
+Triplet::Triplet( unsigned short int  back, unsigned short int forward, char theNextChar)
 {
 	this->back = back;
 	this->forward = forward;

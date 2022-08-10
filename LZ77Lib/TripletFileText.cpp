@@ -40,7 +40,6 @@ void TripletFileText::Close()
 
 Triplet TripletFileText::Read()
 {
-//<<<<<<< HEAD
 	string text;
 	f >> text;
 	Triplet t1;
@@ -54,19 +53,20 @@ Triplet TripletFileText::Read()
 	t1.theNextChar = *it;
 	it += 2;
 	string str = "";
-	for (it; (it != text.rend()) && ( * it != '(' )&& ( * it != ','); it++)
+	for (it; (it != text.rend()) && (*it != '(') && (*it != ','); it++)
 	{
 		str = *it + str;
 	}
 	t1.forward = stoi(str);
 	str = "";
 	for (++it; (it != text.rend()) 
-		&& (* it != '(' )&&(* it != ','); it++)
+		&& (*it != '(') && (*it != ','); it++)
 	{
 		str = *it + str;
 	}
 	t1.back = stoi(str);
-//=======
+	return t1;
+
    /* Triplet t1;
     if (!f.eof())
     {
@@ -93,7 +93,6 @@ Triplet TripletFileText::Read()
         char theNextChar = test[++i];
        t1.theNextChar = theNextChar;
     }*/
-	return t1;
 }
 
 bool TripletFileText::EndOfFile()

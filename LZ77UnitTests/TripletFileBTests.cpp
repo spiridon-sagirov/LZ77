@@ -16,8 +16,8 @@ string readFileContentB(const string& filePath)
 
 void triplet_binary_test_write()
 {
-	string actualFilePath(getUnitTestsDataPath() + "TripletWrite01_actual.binary");
-	string expectedFilePath(getUnitTestsDataPath() + "TripletWrite01_expected.binary");
+	string actualFilePath(getUnitTestsDataPath() + "TripletWrite01_actual.bin");
+	string expectedFilePath(getUnitTestsDataPath() + "TripletWrite01_expected.bin");
 
 	TripletFileBinary tf;
 	tf.OpenWrite(actualFilePath );
@@ -33,7 +33,7 @@ void triplet_binary_test_write()
 
 void triplet_binary_test_read()
 {
-	string inputFilePath(getUnitTestsDataPath() + "TripletRead01_input.binary");
+	string inputFilePath(getUnitTestsDataPath() + "TripletRead01_input.bin");
 
 	TripletFileBinary tfb;
 	tfb.OpenRead(inputFilePath);

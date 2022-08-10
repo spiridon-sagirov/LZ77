@@ -44,6 +44,8 @@ void triplet_test_read()
 
 	BOOST_TEST(triplet1.equals(Triplet(21, 12, 'g')));
 	BOOST_TEST(triplet2.equals(Triplet(34, 43, 'f')));
+
+	tf.Read();
 	BOOST_TEST(tf.EndOfFile());
 
 	tf.Close();

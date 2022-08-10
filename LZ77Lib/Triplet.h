@@ -4,11 +4,11 @@ class Triplet
 {
 
 public:
-    int back;
-	int forward;
+	unsigned short int back;
+	unsigned short int forward;
 	char theNextChar;
 	Triplet();
-	Triplet(int back, int forward, char theNextChar);
+	Triplet(unsigned short int back, unsigned short int forward, char theNextChar);
 
 	bool equals(const Triplet& other);
 };
