@@ -78,7 +78,7 @@ void SlidingWindow::Read(unsigned int bytesCount)
 		searchBuffer.size = searchBufferSize;
 		pointer.read(&(buffer.firstByte[buffer.size - y]), y + 1);
 		lookAheadBuffer.firstByte = y + &(buffer.firstByte[searchBuffer.size]);
-		lookAheadBuffer.size = max((int)(lookAheadBuffer.size - y), 0);
+		lookAheadBuffer.size = max((int)(lookAheadBuffer.size - bytesCount + y), 0);
 	}
 }
 
